@@ -1,0 +1,53 @@
+group 'com.lucdotdev.hover_ussd'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+             url "http://maven.usehover.com/releases"
+             allowInsecureProtocol = true
+              }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.1'
+    }
+
+}
+
+
+
+rootProject.allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+    repositories {
+        google()
+        jcenter()
+        maven {
+             url "http://maven.usehover.com/releases"
+               allowInsecureProtocol = true
+              }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 18
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    dependencies {
+
+        implementation 'com.hover:android-sdk:1.6.3'
+    }
+}
